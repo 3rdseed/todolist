@@ -3,9 +3,9 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
     user:[
         {
-            id: 0,
-            title: "가나다",
-            body: "투두리스트 만들기",
+            user: "",
+            title: "",
+            body: "",
         },
     ]
 };
@@ -17,7 +17,6 @@ const todosSlice = createSlice({
         addlist: (state, action) => {
             state.user = [...state.user, action.payload];
         }
-
     }
 });
 
