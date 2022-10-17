@@ -1,28 +1,20 @@
 import React from 'react'
 import styled from 'styled-components'
 import { useNavigate } from 'react-router-dom';
+import { useDispatch } from "react-redux";
+
 
 const Form = () => {
+    const dispatch = useDispatch();
     const navigate = useNavigate();
 
     return (
-        <div>
-        <FormFont>무엇을 할까요?</FormFont>
-        <StContainer
-        onClick={()=>{
-            navigate("/addlist")
-        }}>
-            <h2>할일 기록하기</h2>
-        </StContainer>
-
-
-        <StContainer
-        onClick={()=>{
-            navigate("/list")
-        }}>
-            <h2>TODO LIST</h2>
-        </StContainer>
-        </div>
+        <StCard
+        onClick={() => {
+            navigate(`/detail/${todo.id}`);
+        }}
+        >
+        </StCard>
     )
 }
 export default Form;

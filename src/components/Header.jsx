@@ -8,13 +8,9 @@ const Header = () => {
   const navigate = useNavigate();
   return (
   <StContainer>
-    {/* <HiHome
-      size="24"
-      onClick={() => {
-        navigate("/");
-      }}
-    /> */}
-    <StTile>모두의 투두 리스트</StTile>
+    <StTile onClick={()=>{
+            navigate("/")
+        }}>TodoList</StTile>
   </StContainer>
   )
 }
