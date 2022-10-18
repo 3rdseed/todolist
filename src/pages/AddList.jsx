@@ -1,33 +1,39 @@
 import React, { useState } from 'react'
 import Layout from '../components/Layout';
 import styled from 'styled-components';
-// import { useDispatch } from 'react-redux';
-// import { addlist } from '../redux/modules/todosSlice';
 import { useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { addList } from '../redux/modules/todosSlice';
 
 const AddList = () => {
 
-  // const dispatch = useDispatch();
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+  
   const [todo, setTodo] = useState({
+    id: "",
     user: "",
     title: "",
     body: "",
   });
 
   const onChangeHandler = (e) => {
-    const { name, value} = e.target;
+    const { name, value } = e.target;
     setTodo({
       ...todo,
-      [name]:value,
+      [name]:value
     });
-    // console.log(e.target.value)
+    console.log(e.target.value)
   }
+
+
+
 
   return (
     <Layout>
-      <div>
-        
+      <form onSubmit={(e)=>{e.preventDefault();
+            navigate("/list");
+            dispatch(addList(todo))}}>
         <StMain>
           <FormFont>작성자</FormFont>
           <StNameInput
@@ -36,7 +42,7 @@ const AddList = () => {
           name="user"
           value={todo.user}
           placeholder="작성자의 이름을 입력해 주세요. (5자 이내)"
-          maxlength="5"
+          maxLength="5"
           required
           />
 
@@ -47,7 +53,7 @@ const AddList = () => {
           name="title"
           value={todo.title}
           placeholder="제목을 입력해 주세요. (50자 이내)"
-          maxlength="50"
+          maxLength="50"
           />
 
           <FormFont>내용</FormFont>
@@ -60,12 +66,10 @@ const AddList = () => {
           maxLength="200"
           />
         </StMain>
-        <Stbutton onClick={()=>{
-            navigate("/list")
-        }}>
+        <Stbutton>
           추가하기
         </Stbutton>
-      </div>
+        </form>
     </Layout>
   )
 }

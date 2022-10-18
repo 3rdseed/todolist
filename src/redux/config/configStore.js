@@ -1,9 +1,9 @@
 import { configureStore } from "@reduxjs/toolkit";
 
-import todosSlice from "../modules/todosSlice"; // 경로 X
+import todos from "../modules/todosSlice";
 
 const store = configureStore({
-    reducer: { todosSlice }
+    reducer: { todos }
 })
 
 export default store;
