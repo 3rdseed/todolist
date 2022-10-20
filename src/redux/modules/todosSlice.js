@@ -35,6 +35,11 @@ const todosSlice = createSlice({
         addList: (state, action) => {
             state.todo = [...state.todo, {...action.payload, id: state.todo.length}]; //id:에 값 넣어주는 코드
         },
+        getList: (state, action) => {
+            state.todo = state.todo.find((todo) => {
+                return todo.id === action.payload
+              })
+        },
         deleteList: (state, action) => {
             state.todo = state.todo.filter((todo) => {
                 if (todo.id === action.payload) {
@@ -47,6 +52,6 @@ const todosSlice = createSlice({
 });
 
 // 액션크리에이터는 컴포넌트에서 사용하기 위해 export
-export const {addList, deleteList} = todosSlice.actions;
+export const {addList,getList, deleteList} = todosSlice.actions;
 // reducer는 configStore에 등록하기 위해 export default한다.
 export default todosSlice.reducer;
