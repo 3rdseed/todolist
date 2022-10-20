@@ -1,44 +1,90 @@
-import React from 'react'
-import styled from 'styled-components';
-import { useNavigate } from 'react-router-dom';
+import React, { useState } from 'react'
+import styled from 'styled-components'
+import { useDispatch } from "react-redux";
+import { useParams } from "react-router-dom";
+import { __addComment } from "../redux/modules/commentsSlice";
 
 const Form = () => {
-    const navigate = useNavigate();
+    const dispatch = useDispatch();
+    const { id } = useParams();
 
+    const [comment, setComment] = useState({
+        username: "",
+        content: "",
+    });
+
+    const onAddCommentButtonHandler = (event) => {
+        event.preventDefault();
+        if (comment.content.trim() === "" || 
+            comment.username.trim() === "") 
+            {
+            return alert("모든 항목을 입력해주세요.");
+        }
+        dispatch(__addComment({ todoId: id, ...comment }));
+        setComment({
+          username: "",
+          content: "",
+        });
+    };
+
+    const onChangeInputHandler = (event) => {
+        const { name, value } = event.target;
+        setComment({
+        ...comment,
+        [name]:value
+        });
+    };
+    
     return (
-        <div>
-        <StFormFont>무엇을 할까요?</StFormFont>
-        <StContainer
-        onClick={()=>{
-            navigate("/addlist")
-        }}>
-            <h2>할일 기록하기</h2>
-        </StContainer>
+        
+        <StForm onSubmit={onAddCommentButtonHandler}>                 
+               <StNameInput
+               type="text"
+               onChange={onChangeInputHandler}
+               name="username"
+               value={comment.username}
+               placeholder="이름 (5자 이내)"
+               maxLength="5"
+               required
+               />
+               <StBodyTextarea
+               type="text"
+               onChange={onChangeInputHandler}
+               name="content"
+               value={comment.content}
+               placeholder="댓글 (100자 이내)"
+               maxLength="100"
+               />            
+        <Stbutton onClick={onAddCommentButtonHandler}>
+          등록
+        </Stbutton>
+        </StForm>
+    );
+};
 
-
-        <StContainer
-        onClick={()=>{
-            navigate("/list")
-        }}>
-            <h2>TODO LIST</h2>
-        </StContainer>
-        </div>
-    )
-}
 export default Form;
 
-const StFormFont = styled.div`
-font-size: 24px;
+const StForm = styled.form`
+  gap: 12px;
+  width: 100%;
+  padding: 0 12px;
 `;
 
-const StContainer = styled.div`
-    width: 100;
-    height: 120px;
-    padding: 0 20px;
-    margin-top: 20px;
-    border: 2px solid #eee;
-    border-radius: 40px;
-    cursor: pointer;
+const StNameInput = styled.input`
+  height: 60px;
+  width: 90%;
 `
 
-
+const StBodyTextarea = styled.textarea`
+  height: 200px;
+  width: 90%;
+`
+const Stbutton = styled.button`
+  width: 30%;
+  height: 60px;
+  padding: 0 20px;
+  margin-top: 20px;
+  border: 2px solid #eee;
+  /* border-radius: 20px; */
+  cursor: pointer;
+`
