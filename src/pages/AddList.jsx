@@ -6,7 +6,6 @@ import { useDispatch } from 'react-redux';
 import { addList } from '../redux/modules/todosSlice';
 
 const AddList = () => {
-
   const navigate = useNavigate();
   const dispatch = useDispatch();
   
@@ -26,9 +25,6 @@ const AddList = () => {
     console.log(e.target.value)
   }
 
-
-
-
   return (
     <Layout>
       <form onSubmit={(e)=>{e.preventDefault();
@@ -45,7 +41,6 @@ const AddList = () => {
           maxLength="5"
           required
           />
-
           <FormFont>제목</FormFont>
           <StNameInput
           type="text"
@@ -55,7 +50,6 @@ const AddList = () => {
           placeholder="제목을 입력해 주세요. (50자 이내)"
           maxLength="50"
           />
-
           <FormFont>내용</FormFont>
           <StBodyTextarea
           type="text"
@@ -100,6 +94,6 @@ const Stbutton = styled.button`
   padding: 0 20px;
   margin-top: 420px;
   border: 2px solid #eee;
-  /* border-radius: 20px; */
+  border-radius: 40px;
   cursor: pointer;
 `

@@ -1,5 +1,5 @@
 import React from 'react'
-import styled from 'styled-components'
+import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
 
 const Form = () => {
@@ -7,7 +7,7 @@ const Form = () => {
 
     return (
         <div>
-        <FormFont>무엇을 할까요?</FormFont>
+        <StFormFont>무엇을 할까요?</StFormFont>
         <StContainer
         onClick={()=>{
             navigate("/addlist")
@@ -27,7 +27,7 @@ const Form = () => {
 }
 export default Form;
 
-const FormFont = styled.div`
+const StFormFont = styled.div`
 font-size: 24px;
 `;
 
@@ -35,9 +35,9 @@ const StContainer = styled.div`
     width: 100;
     height: 120px;
     padding: 0 20px;
-    margin-top: 50px;
+    margin-top: 20px;
     border: 2px solid #eee;
-    border-radius: 20px;
+    border-radius: 40px;
     cursor: pointer;
 `
 

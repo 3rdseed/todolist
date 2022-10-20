@@ -22,7 +22,8 @@ const Header = () => {
 export default Header;
 
 const StContainer = styled.header`
-  background-color: gray;
+  background-color: #c6c0fc;
+  height: 70px;
   display: flex;
   justify-content: space-between;
 `
@@ -32,5 +33,4 @@ const StTile = styled.div`
   font-size: 24px;
   display: flex;
   justify-content: right;
-  align-items: center;
   `;

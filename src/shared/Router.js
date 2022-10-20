@@ -15,6 +15,9 @@ const Router = () => {
                 <Route path="/addlist" element={<AddList />} />
                 <Route path="/list" element={<List />} />
                 <Route path="/detail" element={<Detail />} />
+                
+                {/* id에 해당하는 페이지로 이동 */}
+                <Route path="detail/:id" element={<Detail />} />
             </Routes>
         </BrowserRouter>
     );
