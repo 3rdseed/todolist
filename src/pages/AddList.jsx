@@ -6,6 +6,7 @@ import { useDispatch } from 'react-redux';
 import { addList } from '../redux/modules/todosSlice';
 
 const AddList = () => {
+
   const navigate = useNavigate();
   const dispatch = useDispatch();
   
@@ -22,14 +23,20 @@ const AddList = () => {
       ...todo,
       [name]:value
     });
-    console.log(e.target.value)
   }
 
   return (
     <Layout>
       <form onSubmit={(e)=>{e.preventDefault();
-            navigate("/list");
-            dispatch(addList(todo))}}>
+          if (
+            todo.body.trim() === "" ||
+            todo.user.trim() === "" ||
+            todo.title.trim() === ""
+          ) {
+            return alert("모든 항목을 입력해주세요.");
+          }
+          navigate("/list");
+          dispatch(addList(todo))}}>
         <StMain>
           <FormFont>작성자</FormFont>
           <StNameInput
@@ -41,6 +48,7 @@ const AddList = () => {
           maxLength="5"
           required
           />
+
           <FormFont>제목</FormFont>
           <StNameInput
           type="text"
@@ -50,6 +58,7 @@ const AddList = () => {
           placeholder="제목을 입력해 주세요. (50자 이내)"
           maxLength="50"
           />
+
           <FormFont>내용</FormFont>
           <StBodyTextarea
           type="text"
@@ -75,25 +84,29 @@ font-size: 24px;
 `;
 
 const StNameInput = styled.input`
-  height: 60px;
-  width: 100%;
+  height: 30px;
+  width: 90%;
 `
 
 const StBodyTextarea = styled.textarea`
   height: 200px;
-  width: 100%;
+  width: 90%;
 `
 
 const StMain = styled.div`
-  width: 100%;
+  width: 95%;
+  border: 4px solid teal;
+  min-height: 150px;
+  border-radius: 12px;
+  padding: 12px 24px 24px 24px;
 `
 
 const Stbutton = styled.button`
   width: 100%;
   height: 60px;
   padding: 0 20px;
-  margin-top: 420px;
+  margin-top: 40px;
   border: 2px solid #eee;
-  border-radius: 40px;
+  border-radius: 20px;
   cursor: pointer;
 `
