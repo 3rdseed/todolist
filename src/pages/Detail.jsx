@@ -1,15 +1,15 @@
 import React, { useRef } from 'react'
-import { useSelector } from 'react-redux';
+import { useSelector } from 'react-redux'
 import { useNavigate, useParams } from 'react-router-dom'
 import styled from 'styled-components';
 import Layout from '../components/Layout'
+import { deleteList } from '../redux/modules/todosSlice';
+import Comments from "../components/Comments";
 
 const Detail = () => {
   const navigate = useNavigate();
   const { id } = useParams();
-  console.log(id)
-  const todos = useSelector((state)=> state.todos.todo);
-  console.log(todos)
+  const todos = useSelector((state) => state.todos.todo)
 
   return (
     <Layout>
@@ -25,9 +25,16 @@ const Detail = () => {
           <div>{todo.body}</div>
         </div>
         )
-        })}
-        <button>수정</button>
-        <button>저장</button>
+      })}
+      <button>수정</button>
+      <button>저장</button>
+      <StButton
+        borderColor="red"
+        onClick={() => deleteList(todos.id)}
+      >
+        삭제하기
+      </StButton>
+      <Comments />
     </Layout>
   )
 }
@@ -52,3 +59,12 @@ const StTodoBox = styled.div`
   border-radius: 40px;
   cursor: pointer;
 `
+
+const StButton = styled.button`
+  border: 1px solid ${({ borderColor }) => borderColor};
+  height: 40px;
+  width: 120px;
+  background-color: #fff;
+  border-radius: 12px;
+  cursor: pointer;
+`;
